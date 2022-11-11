@@ -8,3 +8,8 @@
     width: 60vw;
     height: 50vw;
 }
+
+#corner-bg {
+    height: auto;
+    width: 100vw;
+}

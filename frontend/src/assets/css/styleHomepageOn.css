@@ -1,4 +1,48 @@
+.green-rectangle {
+    background-color: #16a085;
+    width: 5vw;
+    height: 10vw;
+}
+
+.quotes-symbol {
+    width: 10vw;
+    height: auto;
+    color: white;
+    -webkit-filter: drop-shadow(0px 0px 4px #2d3436);
+}
+
+.button {
+    width: 20vw;
+    height: 25vw;
+    background-color: #16a085;
+    border: none;
+}
+
+
 #logo2 {
     width: 50vw;
     height: 40vw;
 }
+
+#green-stripe {
+    background-color: #2d3436;
+    width: 105vw;
+    height: 30vw;
+}
+
+#bike-logo {
+    width: 15vw;
+    height: auto;
+}
+
+
+#scooter-logo {
+    width: 12vw;
+    height: auto;
+}
+
+#quiz-logo {
+    width: 10vw;
+    height: auto;
+}
+

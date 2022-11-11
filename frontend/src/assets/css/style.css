@@ -1,12 +1,17 @@
 /* @font-face {
     font-family: "JosefineSans";
     src: url("../fonts/JOSEFIN_SANS/JosefinSans-Bold.ttf");
-}
+} */
 
 @font-face {
     font-family: "Poppins";
     src: url("../fonts/POPPINS/Poppins-Light.otf");
-} */
+} 
+
+@font-face {
+    font-family: "PoppinsMedium";
+    src: url("../fonts/POPPINS/Poppins-Medium.otf");
+} 
 
 .level-main {
     position: absolute;
@@ -26,6 +31,11 @@
 .font-poppins {
     font-family: 'Poppins', Arial, sans-serif;
 }
+
+.font-poppins-medium {
+    font-family: 'PoppinsMedium', Arial, sans-serif;
+}
+
 
 .big-title {
     font-size: 11vw;
@@ -47,6 +57,14 @@
     font-size: 4vw;
 }
 
+.text-grey {
+    color: #2d3436;
+}
+
+.offset-down-0 {
+    bottom: 0;
+}
+
 .offset-down-1 {
     top: 2vw;
 }
@@ -57,6 +75,10 @@
 
 .offset-down-10 {
     top: 20vw;;
+}
+
+.offset-down-12 {
+    top: 25vw;
 }
 
 .offset-down-15 {
@@ -87,8 +109,16 @@
     top: -2vw;
 }
 
+.offset-up-3 {
+    top: -4vw;
+}
+
 .offset-up-5 {
     top: -9vw;
+}
+
+.offset-up-6 {
+    top: -11vw;
 }
 
 .offset-up-7 {
@@ -127,6 +157,14 @@
     right: 0;
 }
 
+.offset-right-3 {
+    right: -4vw;
+}
+
+.offset-right-5 {
+    right: -9vw;
+}
+
 .offset-right-30 {
     right: -30vw;
 }
@@ -135,8 +173,20 @@
     right: 0;
 }
 
+.offset-left-10 {
+    right: 10vw;
+}
+
 .offset-left-30 {
     right: 30vw;
+}
+
+.offset-left-40 {
+    right: 40vw;
+}
+
+.offset-left-80 {
+    right: 80vw;
 }
 
 .relative {
@@ -215,4 +265,8 @@
 
 .main-color {
     color: #16a085;
+}
+
+.vertical-flip {
+    transform: scaleX(-1);
 }

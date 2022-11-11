@@ -2,7 +2,11 @@
 
 import React, { Component} from 'react';
 import bg from "../assets/img/homepage/homepageCorner.png";
-import logo from "../assets/img/homepage/logoNoBG.png"
+import logo from "../assets/img/homepage/logoNoBG.png";
+import quotes from "../assets/img/quotes.svg";
+import bike from "../assets/img/bike.svg";
+import scooter from "../assets/img/scooter.svg";
+import quiz from "../assets/img/quiz.svg";
 import "../assets/css/style.css";
 import "../assets/css/bootstrap.min.css";    
 import "../assets/css/bootstrap-override.css";   
@@ -35,6 +39,19 @@ export default function HomepageOn () {
 
     const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
 
+    const [bikes, setBikes] = React.useState(0);
+    const [people, setPeople] = React.useState(0);
+    const [tip, setTip] = React.useState("Reduce the amount of meat and animal products in your diet.");
+
+    const setToFiveDigits = (n) => {
+
+        let prepended_out = 
+              String(n).padStart(5, '0');
+
+              return prepended_out;
+              
+    }
+
     
     return (
 
@@ -42,14 +59,74 @@ export default function HomepageOn () {
 
             <div className='absolute overlay-1 full-width offset-right-0 offset-up-0'>
                 <div className='row relative '>
-                    <div className='col-6'>
+                    <div className='col-5'>
                         <img src={logo} id="logo2"/>
                     </div>
-                    <div className='col-6 mt-12'>
-                        <div className='small-subtitle ml-5 mt-5 main-color'>{date}</div>
-                        <div className='big-title ml-5 main-color relative offset-up-1'>{time}</div>
+                    <div className='col-6 mt-5'>
+                        <div className='small-subtitle ml-5 mt-5 main-color font-poppins'>{date}</div>
+                        <div className='title ml-5 main-color relative offset-up-1 font-poppins '>{time}</div>
                     </div>
                 </div>
+                <div className='row relative offset-up-3'>
+                    <div className='col-6 row justify-content-center'>
+                        <div className='row justify-content-center'>
+                            <div className='small-subtitle font-poppins-medium text-grey '> BIKES today</div>
+                            <div className='w-100'></div>
+                            <div className='title  font-poppins-medium text-white'>{setToFiveDigits(bikes)}</div>
+                            <div className='w-100'></div>
+                            <div className='green-rectangle absolute offset-right-0 offset-up-0 overlay-minus-1 col-9 offset-up-6'></div>
+                        </div>
+                    </div>
+                    <div className='col-6 row justify-content-center'>
+                        <div className='small-subtitle font-poppins-medium text-grey '> PEOPLE walking</div>
+                        <div className='w-100'></div>
+                            <div className='title  font-poppins-medium text-white'>{setToFiveDigits(people)}</div>
+                            <div className='w-100'></div>
+                            <div className='green-rectangle absolute offset-right-0 offset-up-0 overlay-minus-1 col-9 offset-up-6'></div>
+                    </div>
+                </div>
+
+                <div className='row relative offset-up-3  justify-content-center  '>
+
+                    <div className='relative row overlay-1 justify-content-center mt-5  '>
+
+                        <div className=' subtitle col-10  font-poppins-medium text-white'> {tip} </div>
+
+                    </div>
+
+                    <div className='absolute offset-left-10 offset-up-3 overlay-1'>
+
+                        <img src={quotes} className="quotes-symbol" />
+
+                    </div>
+
+                    <div className='absolute offset-left-80 offset-down-12 overlay-1'>
+
+                        <img src={quotes} className="quotes-symbol vertical-flip"  />
+
+                    </div>
+
+                    <div className='absolute offset-left-0 offset-up-0' id="green-stripe">
+                        
+                    </div>
+                </div>
+
+                <div className='row relative offset-down-5  justify-content-center  '>
+
+                    <button className='col-3 m-4 button'>
+                        <img src={bike} id="bike-logo"/>
+                    </button>
+                    <button className='col-3 m-4 button'>
+                        <img src={scooter} id="scooter-logo"/>
+                    </button>
+                    <button className='col-3 m-4 button'>
+                        <img src={quiz} id="quiz-logo"/>
+                    </button>
+                    
+                </div>
+
+
+
             </div>
 
 

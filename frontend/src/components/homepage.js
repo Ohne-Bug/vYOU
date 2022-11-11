@@ -43,13 +43,13 @@ export default function Homepage () {
                 
             </div>
 
-            <div className= "absolute overlay-1 full-width offset-right-0 offset-up-0">
-                <img src={bg} />
+            <div className= "absolute overlay-1 full-width offset-right-0 offset-down-0">
+                <img src={bg} id="corner-bg" />
             </div>
 
             <div className='absolute overlay-1 full-width offset-right-0 offset-up-0 mt-3'>
-                <div className='small-subtitle ml-5 mt-5 main-color'>{date}</div>
-                <div className='big-title ml-5 main-color relative offset-up-1'>{time}</div>
+                <div className='small-subtitle ml-5 mt-5 main-color font-poppins'>{date}</div>
+                <div className='big-title ml-5 main-color relative offset-up-1 font-poppins'>{time}</div>
 
                 <div className='row justify-content-center relative mt-5'>
                     <img src={logo} id="logo"/>
