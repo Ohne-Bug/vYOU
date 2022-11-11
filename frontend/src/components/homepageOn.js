@@ -21,11 +21,36 @@ export default function HomepageOn () {
 
     const locale = 'en';
     const [today, setDate] = React.useState(new Date());
+    const [tip, setTip] = React.useState("Reduce the amount of meat and animal products in your diet.");
+
+    
+    
+    const updateTip = () => {
+
+        fetch('http://192.168.181.2:3000/api/ecotips/get')
+        .then(response => response.json()).then(json => setTip(json.ecoTip));
+    }
+
+    const getFontSize = ( length ) => {
+        return length / 1;
+    }
+    
+    React.useEffect(() => {
+        const timer = setInterval(() => { 
+
+            updateTip();
+            
+        }, 60 * 1000);
+        return () => clearInterval(timer);
+        
+    }, []);
+    
 
     React.useEffect(() => {
         const timer = setInterval(() => { // Creates an interval which will update the current data every minute
         // This will trigger a rerender every component that uses the useDate hook.
         setDate(new Date());
+        
     }, 60 * 1000);
     return () => {
         clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
@@ -41,7 +66,6 @@ export default function HomepageOn () {
 
     const [bikes, setBikes] = React.useState(0);
     const [people, setPeople] = React.useState(0);
-    const [tip, setTip] = React.useState("Reduce the amount of meat and animal products in your diet.");
 
     const setToFiveDigits = (n) => {
 
@@ -53,6 +77,8 @@ export default function HomepageOn () {
     }
 
     
+
+    
     return (
 
         <div className = "wrapper-outside  ">   
@@ -62,8 +88,9 @@ export default function HomepageOn () {
                     <div className='col-5'>
                         <img src={logo} id="logo2"/>
                     </div>
-                    <div className='col-6 mt-5'>
-                        <div className='small-subtitle ml-5 mt-5 main-color font-poppins'>{date}</div>
+                    <div className='col-6 mt-5 offset-up-3'>
+                        <div className='subtitle ml-5 mt-5 main-color font-poppins-medium'> 30°C </div>
+                        <div className='small-subtitle ml-5  main-color font-poppins'>{date}</div>
                         <div className='title ml-5 main-color relative offset-up-1 font-poppins '>{time}</div>
                     </div>
                 </div>
@@ -90,7 +117,7 @@ export default function HomepageOn () {
 
                     <div className='relative row overlay-1 justify-content-center mt-5  '>
 
-                        <div className=' subtitle col-10  font-poppins-medium text-white'> {tip} </div>
+                        <div className=' subtitle col-10  font-poppins-medium text-white' > {tip} </div>
 
                     </div>
 
