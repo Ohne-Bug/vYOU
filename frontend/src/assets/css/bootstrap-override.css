@@ -1,0 +1,11 @@
+.btn-primary{color:#fff;background-color:#304f9e;border-color:#304f9e}
+.btn-primary:hover{color:#fff;background-color:#98aee6;border-color:#375399}
+.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem #304f9e}
+.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#304f9e;border-color:#304f9e}
+.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>
+.btn-primary.dropdown-toggle{color:#fff;background-color:#375399;border-color:#304f9e}
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,.show>
+.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem #304f9e}
+.pb-10,.py-10{padding-bottom:6rem!important}
+.pb-15,.py-15{padding-bottom:9rem!important}
