@@ -5,7 +5,10 @@ import leftArrow from "../assets/img/leftArrow.svg";
 import "../assets/css/style.css";
 import "../assets/css/bootstrap.min.css";    
 import "../assets/css/bootstrap-override.css";   
-import "../assets/css/styleScootersPage.css";   
+import "../assets/css/styleScootersPage.css";  
+ 
+
+import { MapContainer, TileLayer } from 'react-leaflet';
 
  // Save the current date to be able to trigger an update
 
@@ -15,13 +18,13 @@ import "../assets/css/styleScootersPage.css";
 export default function ScootersPage () {
 
     
-
+    
     
     return (
 
-        <div className = "wrapper-outside">   
+        <div className = "">   
 
-            <div className='absolute full-width offset-up-0 offset-right-0  overlay-1'>
+            {/* <div className='absolute full-width offset-up-0 offset-right-0  overlay-1'>
                 <div className='relative overlay-1 mt-5 ml-3'>
                     <button className='relative offset-down-0 ' id="button-back"> <img src={leftArrow} id="left-arrow"/> </button>
                 </div>
@@ -30,7 +33,40 @@ export default function ScootersPage () {
 
            </div>
 
-           
+            <div> */}
+            {/* <div id="map-container">
+                <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    /> */}
+                    {/* <Marker position={[51.505, -0.09]}>
+                        <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                    </Marker> */}
+                {/* </MapContainer>
+                <h1>ciao</h1> */}
+
+            {/* </div> */}
+            {/* </div> */}
+
+            <div id="map">
+
+                <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {/* <Marker position={[51.505, -0.09]}>
+                    <Popup>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker> */}
+                </MapContainer>
+
+            </div>
+
 
         </div>
         
