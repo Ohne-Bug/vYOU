@@ -3,6 +3,8 @@
     src: url("../fonts/JOSEFIN_SANS/JosefinSans-Bold.ttf");
 } */
 
+
+
 @font-face {
     font-family: "Poppins";
     src: url("../fonts/POPPINS/Poppins-Light.otf");
@@ -12,6 +14,10 @@
     font-family: "PoppinsMedium";
     src: url("../fonts/POPPINS/Poppins-Medium.otf");
 } 
+
+.wrapper-outside {
+    overflow: hidden;
+}
 
 .level-main {
     position: absolute;
@@ -83,6 +89,10 @@
 
 .offset-down-15 {
     top: 31vw;
+}
+
+.offset-down-17 {
+    top: 37vw;
 }
 
 .offset-down-20 {

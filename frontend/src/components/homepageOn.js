@@ -32,10 +32,11 @@ export default function HomepageOn () {
     }
 
     const getFontSize = ( length ) => {
-        return length / 1;
+        return (5 * 51) / (((2*51) + length)/3);
     }
     
     React.useEffect(() => {
+        updateTip();
         const timer = setInterval(() => { 
 
             updateTip();
@@ -117,7 +118,7 @@ export default function HomepageOn () {
 
                     <div className='relative row overlay-1 justify-content-center mt-5  '>
 
-                        <div className=' subtitle col-10  font-poppins-medium text-white' > {tip} </div>
+                        <div className='col-10  font-poppins-medium text-white' style={{fontSize : getFontSize(tip.length) + 'vw'}}> {tip} </div>
 
                     </div>
 
@@ -138,17 +139,21 @@ export default function HomepageOn () {
                     </div>
                 </div>
 
-                <div className='row relative offset-down-5  justify-content-center  '>
+                <div className='row absolute offset-down-0 full-width  justify-content-center  '>
 
-                    <button className='col-3 m-4 button'>
-                        <img src={bike} id="bike-logo"/>
-                    </button>
-                    <button className='col-3 m-4 button'>
-                        <img src={scooter} id="scooter-logo"/>
-                    </button>
-                    <button className='col-3 m-4 button'>
-                        <img src={quiz} id="quiz-logo"/>
-                    </button>
+
+                    <div className=' relative offset-down-17'>
+                        <button className='col-3 m-4 button'>
+                            <img src={bike} id="bike-logo"/>
+                        </button>
+                        <button className='col-3 m-4 button'>
+                            <img src={scooter} id="scooter-logo"/>
+                        </button>
+                        <button className='col-3 m-4 button'>
+                            <img src={quiz} id="quiz-logo"/>
+                        </button>
+
+                    </div>
                     
                 </div>
 

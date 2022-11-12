@@ -1,0 +1,19 @@
+#grey-stripe-2 {
+    background-color: #2d3436;
+    width: 100vw;
+    height: 24vw;
+}
+
+#left-arrow {
+    width: 10vw;
+    height: auto;
+}
+
+#button-back {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
