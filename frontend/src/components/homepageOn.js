@@ -9,8 +9,8 @@ import scooter from "../assets/img/scooter.svg";
 import quiz from "../assets/img/quiz.svg";
 import { Link } from "react-router-dom";
 import "../assets/css/style.css";
-import "../assets/css/bootstrap.min.css";    
-import "../assets/css/bootstrap-override.css";   
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/bootstrap-override.css";
 import "../assets/css/styleHomepageOn.css";
 
  // Save the current date to be able to trigger an update
@@ -23,36 +23,49 @@ export default function HomepageOn () {
     const locale = 'en';
     const [today, setDate] = React.useState(new Date());
     const [tip, setTip] = React.useState("Reduce the amount of meat and animal products in your diet.");
+    const [bikes, setBikes] = React.useState(0);
+    const [people, setPeople] = React.useState(0);
 
-    
-    
     const updateTip = () => {
 
         fetch('http://192.168.181.2:3000/api/ecotips/get')
         .then(response => response.json()).then(json => setTip(json.ecoTip));
     }
 
+    const updatePeople = () => {
+        fetch('http://192.168.181.187:8000/api/people_count')
+        .then(response => response.json()).then(json => {
+            setPeople(json.data.count);
+        });
+    }
+
     const getFontSize = ( length ) => {
         return (5 * 51) / (((2*51) + length)/3);
     }
-    
+
     React.useEffect(() => {
         updateTip();
-        const timer = setInterval(() => { 
-
+        const timer = setInterval(() => {
             updateTip();
-            
         }, 60 * 1000);
         return () => clearInterval(timer);
-        
+
     }, []);
-    
+
+    React.useEffect(() => {
+        updatePeople();
+        const timer = setInterval(() => {
+            updatePeople();
+        }, 5 * 1000);
+        return () => clearInterval(timer);
+    }, []);
+
 
     React.useEffect(() => {
         const timer = setInterval(() => { // Creates an interval which will update the current data every minute
         // This will trigger a rerender every component that uses the useDate hook.
         setDate(new Date());
-        
+
     }, 60 * 1000);
     return () => {
         clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
@@ -66,24 +79,21 @@ export default function HomepageOn () {
 
     const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
 
-    const [bikes, setBikes] = React.useState(0);
-    const [people, setPeople] = React.useState(0);
-
     const setToFiveDigits = (n) => {
 
-        let prepended_out = 
+        let prepended_out =
               String(n).padStart(5, '0');
 
               return prepended_out;
-              
+
     }
 
-    
 
-    
+
+
     return (
 
-        <div className = "wrapper-outside  ">   
+        <div className = "wrapper-outside  ">
 
             <div className='absolute overlay-1 full-width offset-right-0 offset-up-0'>
                 <div className='row relative '>
@@ -136,7 +146,7 @@ export default function HomepageOn () {
                     </div>
 
                     <div className='absolute offset-left-0 offset-up-0' id="green-stripe">
-                        
+
                     </div>
                 </div>
 
@@ -163,7 +173,7 @@ export default function HomepageOn () {
                         </Link>
 
                     </div>
-                    
+
                 </div>
 
 
@@ -172,8 +182,8 @@ export default function HomepageOn () {
 
 
         </div>
-        
-        
+
+
     )
-    
+
 }
