@@ -49,16 +49,6 @@ module.exports.getScooters = async function(lat, long) {
                 },
                 "geofence": "milano1"
             },
-            {
-                "id": "5bf7db6030212164763155c3",
-                "lat": 45.4560585,
-                "lon": 9.195604333333334,
-                "batteryLevelInMiles": 15,
-                "pricing": {
-                    "hourly": 15
-                },
-                "geofence": "milano1"
-            },
             ...
         ]
      */
