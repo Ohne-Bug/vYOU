@@ -22,7 +22,8 @@ module.exports.init = function () {
             relevantInformation.push(obj);
         });
         console.log("Updated bikeMi information");
-    }();
+    };
+    updateFunc();
     setInterval(async function () {
         updateFunc();
     }, 60 * 10 * 1000);

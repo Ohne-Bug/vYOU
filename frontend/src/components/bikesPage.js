@@ -12,6 +12,7 @@ import "../assets/css/styleScootersPage.css";
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import {Icon} from 'leaflet';
+import {getLoc} from "../util/locationUtil";
 
  // Save the current date to be able to trigger an update
 
@@ -54,7 +55,7 @@ import {Icon} from 'leaflet';
 
             <div  className='relative offset-down-10'>
 
-                <MapContainer style={{height:'100vh'}} center={[51.505, -0.09]} zoom={100} scrollWheelZoom={false}>
+                <MapContainer style={{height:'100vh'}} center={getLoc()} zoom={100} scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

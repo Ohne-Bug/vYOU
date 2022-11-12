@@ -12,6 +12,7 @@ import "../assets/css/styleScootersPage.css";
 
 import { MapContainer, TileLayer, Marker, Popup, L, MarkerClusterGroup } from 'react-leaflet';
 import {Icon} from 'leaflet';
+import {getLoc} from "../util/locationUtil";
 
  // Save the current date to be able to trigger an update
 
@@ -21,7 +22,7 @@ export default function ScootersPage () {
     const [positions, setPositions] = useState([]);
 
     const getPositions = async () => {
-        const response = await fetch('http://192.168.181.2:3000/api/helbizscooter/get?lat=45.465730&long=9.182030');
+        const response = await fetch('http://192.168.181.2:3000/api/helbizscooter/get?lat=' + getLoc()[0] + '&long=' + getLoc()[1]);
         const data = await response.json();
         setPositions(data.helbizScooter);
     }
@@ -46,7 +47,7 @@ export default function ScootersPage () {
 
             <div  className='relative offset-down-10'>
 
-                <MapContainer style={{height:'100vh'}} center={[51.505, -0.09]} zoom={100} scrollWheelZoom={false}>
+                <MapContainer style={{height:'100vh'}} center={getLoc()} zoom={100} scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
