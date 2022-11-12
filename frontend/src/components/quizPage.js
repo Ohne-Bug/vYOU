@@ -28,7 +28,8 @@ export default function QuizPage () {
     }, []);
 
     const selectAnswer = (answer) => {
-        setResults(s => [...s, answer]);
+        results.push(answer);
+        setResults([...results]);
         if (answer === questions[question].correctAnswer) {
             if (question === questions.length-1) {
                 fetch('http://192.168.181.2:3000/api/quiz/check', {
