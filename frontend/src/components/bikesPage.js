@@ -65,7 +65,7 @@ import {getLoc} from "../util/locationUtil";
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {positions.filter(position => position.bikesAvailable>0).map(position => (
-                    <Marker icon={new Icon({iconUrl: bike, shadowUrl: scooterShadow,  iconSize: [110, 110], shadowSize: [90, 90], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
+                    <Marker icon={new Icon({iconUrl: bike, shadowUrl: scooterShadow,  iconSize: [110, 110], shadowSize: [115, 115], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
                         <Popup>
                             A pretty CSS3 popup. <br /> Easily customizable.
                         </Popup>
