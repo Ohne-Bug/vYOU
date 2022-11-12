@@ -8,12 +8,12 @@
 @font-face {
     font-family: "Poppins";
     src: url("../fonts/POPPINS/Poppins-Light.otf");
-} 
+}
 
 @font-face {
     font-family: "PoppinsMedium";
     src: url("../fonts/POPPINS/Poppins-Medium.otf");
-} 
+}
 
 .wrapper-outside {
     overflow: hidden;
@@ -80,7 +80,7 @@
 }
 
 .offset-down-10 {
-    top: 20vw;;
+    top: 15vh;
 }
 
 .offset-down-12 {
@@ -261,13 +261,13 @@
     background-color: #fff;
 }
 
-.light-blue-separator-sm {  
+.light-blue-separator-sm {
     height: 20vw;
     width: 100vw;
     background-color: #a9d3ea;
 }
 
-.light-blue-separator-md {  
+.light-blue-separator-md {
     height: 50vw;
     width: 100vw;
     background-color: #a9d3ea;

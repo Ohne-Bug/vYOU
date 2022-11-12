@@ -55,13 +55,13 @@ import {getLoc} from "../util/locationUtil";
 
             <div  className='relative offset-down-10'>
 
-                <MapContainer style={{height:'100vh'}} center={getLoc()} zoom={100} scrollWheelZoom={false}>
+                <MapContainer style={{height:'84vh'}} center={getLoc()} zoom={100} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {positions.map(position => (
-                    <Marker icon={new Icon({iconUrl: bike, shadowUrl: scooterShadow,  iconSize: [190, 190], shadowSize: [200, 200], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
+                {positions.filter(position => position.bikesAvailable>0).map(position => (
+                    <Marker icon={new Icon({iconUrl: bike, shadowUrl: scooterShadow,  iconSize: [110, 110], shadowSize: [90, 90], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
                         <Popup>
                             A pretty CSS3 popup. <br /> Easily customizable.
                         </Popup>
