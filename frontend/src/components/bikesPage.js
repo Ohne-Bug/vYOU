@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { Component} from 'react';
+import React, { Component, useState} from 'react';
 import leftArrow from "../assets/img/leftArrow.svg";
+import bike from "../assets/img/bike.png";
+import scooterShadow from "../assets/img/scooterShadow.png";
 import "../assets/css/style.css";
 import "../assets/css/bootstrap.min.css";    
 import "../assets/css/bootstrap-override.css";   
@@ -9,20 +11,31 @@ import "../assets/css/styleScootersPage.css";
  
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import {Icon} from 'leaflet';
 
  // Save the current date to be able to trigger an update
 
 
 
 
-export default function BikesPage () {
+ export default function ScootersPage () {
 
-    
-    
-    
+    const [positions, setPositions] = useState([]);
+
+    const getPositions = async () => {
+        const response = await fetch('http://192.168.181.2:3000/api/bikemi/get?lat=45.465730&long=9.182030');
+        const data = await response.json();
+        setPositions(data);
+    }
+
+    React.useEffect(() => {
+        getPositions();
+    }, []);
+
+
     return (
 
-        <div className = "">   
+        <div className = "">
 
             <div className='absolute full-width offset-up-0 offset-right-0  overlay-2'>
                 <div className='relative overlay-1 mt-5 ml-3'>
@@ -40,20 +53,21 @@ export default function BikesPage () {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+                {positions.map(position => (
+                    <Marker icon={new Icon({iconUrl: bike, shadowUrl: scooterShadow,  iconSize: [190, 190], shadowSize: [200, 200], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
+                        <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                    </Marker>
+                ))}
                 </MapContainer>
 
             </div>
 
 
         </div>
-        
-        
+
+
     )
-    
+
 }
