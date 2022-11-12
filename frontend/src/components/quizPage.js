@@ -74,8 +74,10 @@ export default function QuizPage () {
             <div className='relative offset-down-10'>
                 <div style={{height: '84vh'}}>
                     { showScore ?
-                        (<div style={{height: '84vh'}}>
-                            <div style={{marginTop: '100px'}}>Your score: {score}. {resultMsg}</div>
+                        (<div className="row justify-content-center mt-5 relative offset-down-5" >
+                            <div className = "subtitle font-poppins col-9" >Your score: {score} </div> 
+                            <div className='w-100'></div>
+                            <div className = "title font-poppins-medium col-10"> {resultMsg}</div>
                         </div>):
                         (<div style={{height: '84vh'}}>
                             <div className='row justify-content-center mt-5 relative offset-down-5'>
