@@ -4,6 +4,7 @@ let relevantInformation = [];
 
 module.exports.init = function () {
     const updateFunc = async function () {
+        relevantInformation = [];
         let jsonInfo = await fetch('https://gbfs.urbansharing.com/bikemi.com/station_information.json');
         jsonInfo = await jsonInfo.json();
         stationInformation = jsonInfo.data.stations;

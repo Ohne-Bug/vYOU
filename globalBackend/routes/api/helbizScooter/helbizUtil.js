@@ -3,25 +3,19 @@ const authConfig = require('./auth.json');
 let token = null;
 
 module.exports.init = function() {
-    const updateFunc = async function () {
-        fetch('https://api.helbiz.com/prod/user/authenticate', {
-            method: 'POST',
-            headers: {
-                'User-Agent': 'Helbiz (com.helbiz.android)',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: authConfig.email,
-                password: authConfig.password
-            })
-        }).then(res => res.json())
-            .then(json => token = json.token)
-            .then(() => console.log('Updated helbiz information'));
-    }();
-    setInterval(async function () {
-        updateFunc();
-    }, 60 * 10 * 1000);
-
+    fetch('https://api.helbiz.com/prod/user/authenticate', {
+        method: 'POST',
+        headers: {
+            'User-Agent': 'Helbiz (com.helbiz.android)',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: authConfig.email,
+            password: authConfig.password
+        })
+    }).then(res => res.json())
+        .then(json => token = json.token)
+        .then(() => console.log('Updated helbiz information'));
 }
 
 module.exports.getScooters = async function(lat, long) {
