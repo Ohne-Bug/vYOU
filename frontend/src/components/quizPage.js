@@ -1,6 +1,9 @@
 import React, {Component, useState} from 'react';
 import leftArrow from "../assets/img/leftArrow.svg";
 import { Link } from 'react-router-dom';
+import "../assets/css/style.css";
+import "../assets/css/bootstrap.min.css";    
+import "../assets/css/styleQuizPage.css";
 
 export default function QuizPage () {
     const [questions, setQuestions] = useState([{
@@ -71,15 +74,28 @@ export default function QuizPage () {
             <div className='relative offset-down-10'>
                 <div style={{height: '84vh'}}>
                     { showScore ?
-                        (<div style={{height: '84vh'}}>
-                            <div style={{marginTop: '100px'}}>Your score: {score}. {resultMsg}</div>
+                        (<div className="row justify-content-center mt-5 relative offset-down-5" >
+                            <div className = "subtitle font-poppins col-9" >Your score: {score} </div> 
+                            <div className='w-100'></div>
+                            <div className = "title font-poppins-medium col-10"> {resultMsg}</div>
                         </div>):
                         (<div style={{height: '84vh'}}>
-                            <div style={{marginTop: '100px'}}>{questions[question].question}</div>
-                            <div style={{marginTop: '100px'}}>
-                                {questions[question].answers.map((e, i) => i).map((answer) => {
-                                    return <button onClick={() => selectAnswer(answer)}>{questions[question].answers[answer]}</button>
-                                })}
+                            <div className='row justify-content-center mt-5 relative offset-down-5'>
+                                <div className = "subtitle font-poppins-medium col-10" style={{marginTop: '100px'}}>{questions[question].question}</div>
+                            </div>
+
+                            <div className='row justify-content-center'>
+                                <div className='row justify-content-center col-8 mt-5 relative offset-down-5'>
+                                    <div style={{marginTop: '100px'}}>
+                                        {questions[question].answers.map((e, i) => i).map((answer) => {
+                                            return <span className='col-3 m-3 '>
+                                                        <button className = "button-answer m-3" onClick={() => selectAnswer(answer)}>
+                                                            <span className='text-white font-poppins-medium xs-subtitle'>{questions[question].answers[answer]} </span>
+                                                        </button> 
+                                                    </span>
+                                        })}
+                                    </div>
+                                </div>
                             </div>
                         </div>)
                     }
