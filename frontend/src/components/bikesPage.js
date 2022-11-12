@@ -5,10 +5,10 @@ import leftArrow from "../assets/img/leftArrow.svg";
 import bike from "../assets/img/bike.png";
 import scooterShadow from "../assets/img/scooterShadow.png";
 import "../assets/css/style.css";
-import "../assets/css/bootstrap.min.css";    
-import "../assets/css/bootstrap-override.css";   
-import "../assets/css/styleScootersPage.css";  
- 
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/bootstrap-override.css";
+import "../assets/css/styleScootersPage.css";
+
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import {Icon} from 'leaflet';
@@ -23,13 +23,19 @@ import {Icon} from 'leaflet';
     const [positions, setPositions] = useState([]);
 
     const getPositions = async () => {
-        const response = await fetch('http://192.168.181.2:3000/api/bikemi/get?lat=45.465730&long=9.182030');
+        const response = await fetch('http://192.168.181.2:3000/api/bikemi/get');
         const data = await response.json();
         setPositions(data);
     }
 
     React.useEffect(() => {
         getPositions();
+        const timer = setInterval(() => {
+
+            getPositions();
+
+        }, 10 * 60 * 1000);
+        return () => clearInterval(timer);
     }, []);
 
 

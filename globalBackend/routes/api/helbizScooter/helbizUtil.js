@@ -15,7 +15,7 @@ module.exports.init = function() {
         })
     }).then(res => res.json())
         .then(json => token = json.token)
-        .then(() => console.log('Updated helbiz information'));
+        .then(() => console.log('Initialized helbiz information'));
 }
 
 module.exports.getScooters = async function(lat, long) {
