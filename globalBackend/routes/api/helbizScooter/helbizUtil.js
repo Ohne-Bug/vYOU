@@ -18,8 +18,8 @@ module.exports.init = function() {
         .then(() => console.log('Initialized helbizUtil'));
 }
 
-module.exports.getScooters = async function(long, lat) {
-    const northWest = (lat-0.005)+'%2C'+(long+0.005);//(lat)+'%2C'+long; //FIXME: does not work for greenwich
+module.exports.getScooters = async function(lat, long) {
+    const northWest = (lat-0.05)+'%2C'+(long+0.05);//(lat)+'%2C'+long; //FIXME: does not work for greenwich
     const southEast = (lat+0.005)+'%2C'+(long-0.005);//(lat-0.01)+'%2C'+(long-0.01); //FIXME: does not work for greenwich
     let resp = await fetch('https://api.helbiz.com/prod/scooters?northWest=' + northWest + '&southEast=' + southEast, {
         method: 'GET',
