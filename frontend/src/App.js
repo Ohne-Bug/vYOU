@@ -3,14 +3,30 @@ import Homepage from './components/homepage';
 import HomepageOn from './components/homepageOn';
 import ScootersPage from './components/scootersPage';
 import BikesPage from './components/bikesPage';
-import { BrowserRouter as Router, Switch, 
-  Route, Redirect,} from "react-router-dom";
+import QuizPage from "./components/quizPage";
+import { BrowserRouter as Router, Routes, 
+  Route} from "react-router-dom";
 import './App.css';
 
 function App() {
   return (
     <div>
-      <BikesPage/>
+       <Router>
+        <Routes>
+          <Route exact path="/" element={<HomepageOn/>} />
+            
+          <Route path="/on" element={<HomepageOn/>} />
+            
+          <Route path="/scooters-page" element={<ScootersPage/>} />
+
+          <Route path="/bikes-page" element={<BikesPage/>} />
+
+          <Route path="/quiz-page" element={<QuizPage/>} />
+            
+          {/* <Navigate to="/" /> */}
+        </Routes>
+      </Router>
+      {/* <BikesPage/> */}
     </div>
   );
 }
