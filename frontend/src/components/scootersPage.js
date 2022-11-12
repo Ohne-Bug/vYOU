@@ -56,7 +56,7 @@ export default function ScootersPage () {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {positions.map(position => (
-                    <Marker icon={new Icon({iconUrl: scooter, shadowUrl: scooterShadow,  iconSize: [190, 190], shadowSize: [200, 200], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
+                    <Marker icon={new Icon({iconUrl: scooter, shadowUrl: scooterShadow,  iconSize: [110, 110], shadowSize: [115, 115], iconAnchor: [12, 41]})} position={[position.lat, position.lon]}>
                         <Popup>
                             A pretty CSS3 popup. <br /> Easily customizable.
                         </Popup>
