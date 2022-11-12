@@ -49,7 +49,7 @@ export default function HomepageOn () {
         });
     }
 
-    const updatePrximity = () => {
+    const updateProximity = () => {
         fetch('http://192.168.181.187:8000/api/distance')
             .then(response => response.json()).then(json => {
             if (json.status !== 'ko') {
@@ -94,9 +94,9 @@ export default function HomepageOn () {
     }, []);
 
     React.useEffect(() => {
-        updatePrximity();
+        updateProximity();
         const timer = setInterval(() => {
-            updatePrximity();
+            updateProximity();
         }, 2 * 1000);
         return () => clearInterval(timer);
     });
@@ -122,7 +122,7 @@ export default function HomepageOn () {
 
     return (
 
-        <div className = "wrapper-outside  ">
+        <div className = "wrapper-outside ">
 
             <div className='absolute overlay-1 full-width offset-right-0 offset-up-0'>
                 <div className='row relative '>

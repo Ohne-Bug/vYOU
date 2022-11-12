@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import leftArrow from "../assets/img/leftArrow.svg";
 import { Link } from 'react-router-dom';
 import "../assets/css/style.css";
-import "../assets/css/bootstrap.min.css";    
+import "../assets/css/bootstrap.min.css";
 import "../assets/css/styleQuizPage.css";
 
 export default function QuizPage () {
@@ -28,11 +28,9 @@ export default function QuizPage () {
     }, []);
 
     const selectAnswer = (answer) => {
-        if (question < questions.length-1){
-            setResults([...results, answer]);
-            if (answer === questions[question].correctAnswer) {
-                setQuestion(question + 1);
-            }else{
+        setResults(s => [...s, answer]);
+        if (answer === questions[question].correctAnswer) {
+            if (question === questions.length-1) {
                 fetch('http://192.168.181.2:3000/api/quiz/check', {
                     method: 'POST',
                     headers: {
@@ -41,9 +39,11 @@ export default function QuizPage () {
                     body: JSON.stringify(results)
                 }).then(res => res.json()).then(data => {
                     setScore(data.score);
-                    setResultMsg('The correct answer would be ' + questions[question].answers[questions[question].correctAnswer]+'.');
+                    setResultMsg('You have everything right!');
                     setShowScore(true);
                 });
+            }else {
+                setQuestion(question + 1);
             }
         }else{
             fetch('http://192.168.181.2:3000/api/quiz/check', {
@@ -54,7 +54,7 @@ export default function QuizPage () {
                 body: JSON.stringify(results)
             }).then(res => res.json()).then(data => {
                 setScore(data.score);
-                setResultMsg('You have everything right!');
+                setResultMsg('The correct answer would be ' + questions[question].answers[questions[question].correctAnswer]+'.');
                 setShowScore(true);
             });
         }
@@ -75,7 +75,7 @@ export default function QuizPage () {
                 <div style={{height: '84vh'}}>
                     { showScore ?
                         (<div className="row justify-content-center mt-5 relative offset-down-5" >
-                            <div className = "subtitle font-poppins col-9" >Your score: {score} </div> 
+                            <div className = "subtitle font-poppins col-9" >Your score: {score} </div>
                             <div className='w-100'></div>
                             <div className = "title font-poppins-medium col-10"> {resultMsg}</div>
                         </div>):
@@ -85,13 +85,13 @@ export default function QuizPage () {
                             </div>
 
                             <div className='row justify-content-center'>
-                                <div className='row justify-content-center col-8 mt-5 relative offset-down-5'>
+                                <div className='row justify-content-center col-10 mt-5 relative '>
                                     <div style={{marginTop: '100px'}}>
-                                        {questions[question].answers.map((e, i) => i).map((answer) => {
+                                        {questions[question].answers.map((answer, i) => {
                                             return <span className='col-3 m-3 '>
-                                                        <button className = "button-answer m-3" onClick={() => selectAnswer(answer)}>
-                                                            <span className='text-white font-poppins-medium xs-subtitle'>{questions[question].answers[answer]} </span>
-                                                        </button> 
+                                                        <button className = "button-answer m-3" onClick={() => selectAnswer(i)}>
+                                                            <span className='text-white font-poppins-medium xs-subtitle'>{answer} </span>
+                                                        </button>
                                                     </span>
                                         })}
                                     </div>

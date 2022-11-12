@@ -10,7 +10,7 @@ import './App.css';
 
 function App() {
   return (
-    <div>
+    <div className={''}>
        <Router>
         <Routes>
           <Route exact path="/" element={<Homepage/>} />
