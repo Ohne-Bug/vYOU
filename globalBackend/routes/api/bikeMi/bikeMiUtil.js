@@ -3,7 +3,7 @@ let stationStatus = {};
 let relevantInformation = [];
 
 module.exports.init = function () {
-    setInterval(async function () {
+    const updateFunc = async function () {
         let jsonInfo = await fetch('https://gbfs.urbansharing.com/bikemi.com/station_information.json');
         jsonInfo = await jsonInfo.json();
         stationInformation = jsonInfo.data.stations;
@@ -21,7 +21,10 @@ module.exports.init = function () {
             relevantInformation.push(obj);
         });
         console.log("Updated bikeMi information");
-    }, 10 * 1000);
+    }();
+    setInterval(async function () {
+        updateFunc();
+    }, 60 * 10 * 1000);
 }
 
 module.exports.get = function () {
