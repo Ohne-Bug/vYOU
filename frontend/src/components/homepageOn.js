@@ -7,6 +7,7 @@ import quotes from "../assets/img/quotes.svg";
 import bike from "../assets/img/bike.svg";
 import scooter from "../assets/img/scooter.svg";
 import quiz from "../assets/img/quiz.svg";
+import { Link } from "react-router-dom";
 import "../assets/css/style.css";
 import "../assets/css/bootstrap.min.css";    
 import "../assets/css/bootstrap-override.css";   
@@ -143,15 +144,23 @@ export default function HomepageOn () {
 
 
                     <div className=' relative offset-down-17'>
-                        <button className='col-3 m-4 button'>
-                            <img src={bike} id="bike-logo"/>
-                        </button>
-                        <button className='col-3 m-4 button'>
-                            <img src={scooter} id="scooter-logo"/>
-                        </button>
-                        <button className='col-3 m-4 button'>
-                            <img src={quiz} id="quiz-logo"/>
-                        </button>
+                        <Link to="/bikes-page">
+                            <button className='col-3 m-4 button'>
+                                <img src={bike} id="bike-logo"/>
+                            </button>
+                        </Link>
+
+                        <Link to="/scooters-page">
+                            <button className='col-3 m-4 button'>
+                                <img src={scooter} id="scooter-logo"/>
+                            </button>
+                        </Link>
+
+                        <Link to="/quiz-page">
+                            <button className='col-3 m-4 button'>
+                                <img src={quiz} id="quiz-logo"/>
+                            </button>
+                        </Link>
 
                     </div>
                     

@@ -1,5 +1,6 @@
 import React, {Component, useState} from 'react';
 import leftArrow from "../assets/img/leftArrow.svg";
+import { Link } from 'react-router-dom';
 
 export default function QuizPage () {
     const [questions, setQuestions] = useState([{
@@ -60,7 +61,9 @@ export default function QuizPage () {
         <div className=''>
             <div className='absolute full-width offset-up-0 offset-right-0  overlay-2'>
                 <div className='relative overlay-1 mt-5 ml-3'>
-                    <button className='relative offset-down-0 ' id="button-back"> <img src={leftArrow} id="left-arrow"/> </button>
+                    <Link to="/on">
+                        <button className='relative offset-down-0 ' id="button-back"> <img src={leftArrow} id="left-arrow"/> </button>
+                    </Link>
                 </div>
                 <div className='absolute full-width offset-up-0 offset-right-0' id="grey-stripe-2"></div>
             </div>
