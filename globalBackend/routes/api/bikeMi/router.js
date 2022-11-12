@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-const ecoTipsUtil = require('./ecoTipsUtil');
+const bikeMiUtil = require('./bikeMiUtil');
 
 router.get('/get', function(req, res, next) {
-    res.json({
-        "ecoTip": ecoTipsUtil.get()
-    })
+    res.json(bikeMiUtil.get());
 });
 
 module.exports = router;

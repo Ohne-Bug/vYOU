@@ -1,0 +1,15 @@
+#background-homepage {
+    background-color: #2d3436;
+    height: 100vh;
+    width: 100vw;
+}
+
+#logo {
+    width: 60vw;
+    height: 50vw;
+}
+
+#corner-bg {
+    height: auto;
+    width: 100vw;
+}

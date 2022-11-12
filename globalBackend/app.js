@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -10,12 +11,17 @@ var apiRouter = require('./routes/api/api');
 
 var app = express();
 
-const ecoTipsUtil = require('./util/ecoTipsUtil');
+const ecoTipsUtil = require('./routes/api/ecoTips/ecoTipsUtil');
 ecoTipsUtil.init();
-
+const helbizScooterUtil = require('./routes/api/helbizScooter/helbizUtil');
+helbizScooterUtil.init();
+const bikeMiUtil = require('./routes/api/bikeMi/bikeMiUtil');
+bikeMiUtil.init();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());
