@@ -14,13 +14,13 @@ router.get('/get', function(req, res, next) {
 router.post('/check', function(req, res, next) {
     let quiz = quizData.questions;
     let score = 0;
-    for (let i of quiz) {
-        if (i.correctAnswer === req.body[i.id]) {
+    for (let i = 0; i < quiz.length; i++) {
+        if (quiz[i].correctAnswer === req.body[i]) {
             score++;
         }
     }
     if (score === quiz.length) {
-
+        //TODO: Give user a discount code
     }
     res.json({
         score
