@@ -15,6 +15,8 @@ const ecoTipsUtil = require('./routes/api/ecoTips/ecoTipsUtil');
 ecoTipsUtil.init();
 const helbizScooterUtil = require('./routes/api/helbizScooter/helbizUtil');
 helbizScooterUtil.init();
+const bikeMiUtil = require('./routes/api/bikeMi/bikeMiUtil');
+bikeMiUtil.init();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
