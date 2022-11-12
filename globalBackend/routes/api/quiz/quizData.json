@@ -15,8 +15,7 @@
       "answers": [
         "Paris",
         "London",
-        "Berlin",
-        "Rome"
+        "Berlin"
       ],
       "correctAnswer": 2
     },
@@ -24,11 +23,9 @@
       "question": "What is the capital of Italy?",
       "answers": [
         "Paris",
-        "London",
-        "Berlin",
         "Rome"
       ],
-      "correctAnswer": 3
+      "correctAnswer": 1
     },
     {
       "question": "What is the capital of England?",

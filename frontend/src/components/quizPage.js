@@ -4,17 +4,19 @@ import leftArrow from "../assets/img/leftArrow.svg";
 export default function QuizPage () {
     const [questions, setQuestions] = useState([{
         question: '',
-        answers: ['', '', '', '']
+        answers: ['', '', '', ''],
+        correctAnswer: 0
     }]);
     const [question, setQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [results, setResults] = useState([]);
     const [score, setScore] = useState(0);
+    const [resultMsg, setResultMsg] = useState('');
 
     const getQuestions = async () => {
         const response = await fetch('http://192.168.181.2:3000/api/quiz/get');
         const data = await response.json();
-        setQuestions(data);
+        setQuestions(data.questions);
     }
 
     React.useEffect(() => {
@@ -24,7 +26,21 @@ export default function QuizPage () {
     const selectAnswer = (answer) => {
         if (question < questions.length-1){
             setResults([...results, answer]);
-            setQuestion(question + 1);
+            if (answer === questions[question].correctAnswer) {
+                setQuestion(question + 1);
+            }else{
+                fetch('http://192.168.181.2:3000/api/quiz/check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(results)
+                }).then(res => res.json()).then(data => {
+                    setScore(data.score);
+                    setResultMsg('The correct answer would be ' + questions[question].answers[questions[question].correctAnswer]+'.');
+                    setShowScore(true);
+                });
+            }
         }else{
             fetch('http://192.168.181.2:3000/api/quiz/check', {
                 method: 'POST',
@@ -34,6 +50,7 @@ export default function QuizPage () {
                 body: JSON.stringify(results)
             }).then(res => res.json()).then(data => {
                 setScore(data.score);
+                setResultMsg('You have everything right!');
                 setShowScore(true);
             });
         }
@@ -52,12 +69,12 @@ export default function QuizPage () {
                 <div style={{height: '84vh'}}>
                     { showScore ?
                         (<div style={{height: '84vh'}}>
-                            <div style={{marginTop: '100px'}}>Your score: {score}. Here is a random rabattcode that you will probably never use</div>
+                            <div style={{marginTop: '100px'}}>Your score: {score}. {resultMsg}</div>
                         </div>):
                         (<div style={{height: '84vh'}}>
                             <div style={{marginTop: '100px'}}>{questions[question].question}</div>
                             <div style={{marginTop: '100px'}}>
-                                {[0, 1, 2, 3].map((answer) => {
+                                {questions[question].answers.map((e, i) => i).map((answer) => {
                                     return <button onClick={() => selectAnswer(answer)}>{questions[question].answers[answer]}</button>
                                 })}
                             </div>
