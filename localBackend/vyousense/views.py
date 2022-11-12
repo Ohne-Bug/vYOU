@@ -41,3 +41,4 @@ def person_detected(request):
 @never_cache
 def people_count(request):
 	return JsonResponse({"status": "ok", "data": {"count": people_counter}})
+
