@@ -1,39 +1,29 @@
 {
   "questions": [
     {
-      "question": "What is the capital of France?",
+      "question": "Almost all human activities produce emissions, but which one produces the most?",
       "answers": [
-        "Paris",
-        "London",
-        "Berlin",
-        "Rome"
+        "Energy",
+        "Transports",
+        "Farms"
       ],
       "correctAnswer": 0
     },
     {
-      "question": "What is the capital of Germany?",
+      "question": "How much CO2e (emissions) (in tons) did the humanity produce during 2020?",
       "answers": [
-        "Paris",
-        "London",
-        "Berlin"
-      ],
-      "correctAnswer": 2
-    },
-    {
-      "question": "What is the capital of Italy?",
-      "answers": [
-        "Paris",
-        "Rome"
+        "15 B",
+        "50 B",
+        "800 M"
       ],
       "correctAnswer": 1
     },
     {
-      "question": "What is the capital of England?",
+      "question": "How much impact on the enviroment has 1kg of methane compared to the CO2? (1Kg of methane has same impact of ... kg of CO2)",
       "answers": [
-        "Paris",
-        "London",
-        "Berlin",
-        "Rome"
+        "304",
+        "28",
+        "12"
       ],
       "correctAnswer": 1
     }

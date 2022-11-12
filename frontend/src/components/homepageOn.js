@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { Component} from 'react';
+import React, {Component, useCallback} from 'react';
 import bg from "../assets/img/homepage/homepageCorner.png";
 import logo from "../assets/img/homepage/logoNoBG.png";
 import quotes from "../assets/img/quotes.svg";
@@ -9,9 +9,11 @@ import scooter from "../assets/img/scooter.svg";
 import quiz from "../assets/img/quiz.svg";
 import { Link } from "react-router-dom";
 import "../assets/css/style.css";
-import "../assets/css/bootstrap.min.css";    
-import "../assets/css/bootstrap-override.css";   
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/bootstrap-override.css";
 import "../assets/css/styleHomepageOn.css";
+import { useNavigate } from "react-router-dom";
+
 
  // Save the current date to be able to trigger an update
 
@@ -23,41 +25,81 @@ export default function HomepageOn () {
     const locale = 'en';
     const [today, setDate] = React.useState(new Date());
     const [tip, setTip] = React.useState("Reduce the amount of meat and animal products in your diet.");
+    const [bikes, setBikes] = React.useState(0);
+    const [people, setPeople] = React.useState(0);
+    const [temp, setTemp] = React.useState(23);
+    let navigate = useNavigate();
 
-    
-    
     const updateTip = () => {
 
         fetch('http://192.168.181.2:3000/api/ecotips/get')
         .then(response => response.json()).then(json => setTip(json.ecoTip));
     }
 
+    const updateLocalSensorData = () => {
+        fetch('http://192.168.181.187:8000/api/people_count')
+        .then(response => response.json()).then(json => {
+            if (json.status !== 'ko')
+                setPeople(json.data.count);
+        });
+        fetch('http://192.168.181.187:8000/api/temperature')
+        .then(response => response.json()).then(json => {
+            if (json.status !== 'ko')
+                setTemp(json.data.temperature);
+        });
+    }
+
+    const updateProximity = () => {
+        fetch('http://192.168.181.187:8000/api/distance')
+            .then(response => response.json()).then(json => {
+            if (json.status !== 'ko') {
+                if (json.data.distance >= 200) {
+                    navigate("/");
+                }
+            }
+        });
+    }
+
     const getFontSize = ( length ) => {
         return (5 * 51) / (((2*51) + length)/3);
     }
-    
+
     React.useEffect(() => {
         updateTip();
-        const timer = setInterval(() => { 
-
+        const timer = setInterval(() => {
             updateTip();
-            
         }, 60 * 1000);
         return () => clearInterval(timer);
-        
+
     }, []);
-    
+
+    React.useEffect(() => {
+        updateLocalSensorData();
+        const timer = setInterval(() => {
+            updateLocalSensorData();
+        }, 5 * 1000);
+        return () => clearInterval(timer);
+    }, []);
+
 
     React.useEffect(() => {
         const timer = setInterval(() => { // Creates an interval which will update the current data every minute
         // This will trigger a rerender every component that uses the useDate hook.
-        setDate(new Date());
-        
-    }, 60 * 1000);
+            setDate(new Date());
+
+        }, 60 * 1000);
     return () => {
         clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
     }
     }, []);
+
+    React.useEffect(() => {
+        updateProximity();
+        const timer = setInterval(() => {
+            updateProximity();
+        }, 2 * 1000);
+        return () => clearInterval(timer);
+    });
 
     const day = today.toLocaleDateString(locale, { weekday: 'long' });
     const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, { month: 'long' })}\n\n`;
@@ -66,24 +108,21 @@ export default function HomepageOn () {
 
     const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
 
-    const [bikes, setBikes] = React.useState(0);
-    const [people, setPeople] = React.useState(0);
-
     const setToFiveDigits = (n) => {
 
-        let prepended_out = 
+        let prepended_out =
               String(n).padStart(5, '0');
 
               return prepended_out;
-              
+
     }
 
-    
 
-    
+
+
     return (
 
-        <div className = "wrapper-outside  ">   
+        <div className = "wrapper-outside ">
 
             <div className='absolute overlay-1 full-width offset-right-0 offset-up-0'>
                 <div className='row relative '>
@@ -91,7 +130,7 @@ export default function HomepageOn () {
                         <img src={logo} id="logo2"/>
                     </div>
                     <div className='col-6 mt-5 offset-up-3'>
-                        <div className='subtitle ml-5 mt-5 main-color font-poppins-medium'> 30°C </div>
+                        <div className='subtitle ml-5 mt-5 main-color font-poppins-medium'> {temp}°C </div>
                         <div className='small-subtitle ml-5  main-color font-poppins'>{date}</div>
                         <div className='title ml-5 main-color relative offset-up-1 font-poppins '>{time}</div>
                     </div>
@@ -136,7 +175,7 @@ export default function HomepageOn () {
                     </div>
 
                     <div className='absolute offset-left-0 offset-up-0' id="green-stripe">
-                        
+
                     </div>
                 </div>
 
@@ -163,7 +202,7 @@ export default function HomepageOn () {
                         </Link>
 
                     </div>
-                    
+
                 </div>
 
 
@@ -172,8 +211,8 @@ export default function HomepageOn () {
 
 
         </div>
-        
-        
+
+
     )
-    
+
 }
