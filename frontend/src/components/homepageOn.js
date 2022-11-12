@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { Component} from 'react';
+import React, {Component, useCallback} from 'react';
 import bg from "../assets/img/homepage/homepageCorner.png";
 import logo from "../assets/img/homepage/logoNoBG.png";
 import quotes from "../assets/img/quotes.svg";
@@ -12,6 +12,8 @@ import "../assets/css/style.css";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootstrap-override.css";
 import "../assets/css/styleHomepageOn.css";
+import { useNavigate } from "react-router-dom";
+
 
  // Save the current date to be able to trigger an update
 
@@ -25,6 +27,8 @@ export default function HomepageOn () {
     const [tip, setTip] = React.useState("Reduce the amount of meat and animal products in your diet.");
     const [bikes, setBikes] = React.useState(0);
     const [people, setPeople] = React.useState(0);
+    const [temp, setTemp] = React.useState(23);
+    let navigate = useNavigate();
 
     const updateTip = () => {
 
@@ -32,10 +36,27 @@ export default function HomepageOn () {
         .then(response => response.json()).then(json => setTip(json.ecoTip));
     }
 
-    const updatePeople = () => {
+    const updateLocalSensorData = () => {
         fetch('http://192.168.181.187:8000/api/people_count')
         .then(response => response.json()).then(json => {
-            setPeople(json.data.count);
+            if (json.status !== 'ko')
+                setPeople(json.data.count);
+        });
+        fetch('http://192.168.181.187:8000/api/temperature')
+        .then(response => response.json()).then(json => {
+            if (json.status !== 'ko')
+                setTemp(json.data.temperature);
+        });
+    }
+
+    const updatePrximity = () => {
+        fetch('http://192.168.181.187:8000/api/distance')
+            .then(response => response.json()).then(json => {
+            if (json.status !== 'ko') {
+                if (json.data.distance >= 200) {
+                    navigate("/");
+                }
+            }
         });
     }
 
@@ -53,9 +74,9 @@ export default function HomepageOn () {
     }, []);
 
     React.useEffect(() => {
-        updatePeople();
+        updateLocalSensorData();
         const timer = setInterval(() => {
-            updatePeople();
+            updateLocalSensorData();
         }, 5 * 1000);
         return () => clearInterval(timer);
     }, []);
@@ -64,13 +85,21 @@ export default function HomepageOn () {
     React.useEffect(() => {
         const timer = setInterval(() => { // Creates an interval which will update the current data every minute
         // This will trigger a rerender every component that uses the useDate hook.
-        setDate(new Date());
+            setDate(new Date());
 
-    }, 60 * 1000);
+        }, 60 * 1000);
     return () => {
         clearInterval(timer); // Return a funtion to clear the timer so that it will stop being called on unmount
     }
     }, []);
+
+    React.useEffect(() => {
+        updatePrximity();
+        const timer = setInterval(() => {
+            updatePrximity();
+        }, 2 * 1000);
+        return () => clearInterval(timer);
+    });
 
     const day = today.toLocaleDateString(locale, { weekday: 'long' });
     const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, { month: 'long' })}\n\n`;
@@ -101,7 +130,7 @@ export default function HomepageOn () {
                         <img src={logo} id="logo2"/>
                     </div>
                     <div className='col-6 mt-5 offset-up-3'>
-                        <div className='subtitle ml-5 mt-5 main-color font-poppins-medium'> 30°C </div>
+                        <div className='subtitle ml-5 mt-5 main-color font-poppins-medium'> {temp}°C </div>
                         <div className='small-subtitle ml-5  main-color font-poppins'>{date}</div>
                         <div className='title ml-5 main-color relative offset-up-1 font-poppins '>{time}</div>
                     </div>

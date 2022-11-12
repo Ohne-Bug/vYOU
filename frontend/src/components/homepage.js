@@ -4,8 +4,9 @@ import React, { Component} from 'react';
 import bg from "../assets/img/homepage/homepageCorner.png";
 import logo from "../assets/img/homepage/logoNoBG.png"
 import "../assets/css/style.css";
-import "../assets/css/bootstrap.min.css";    
+import "../assets/css/bootstrap.min.css";
 import "../assets/css/styleHomepage.css";
+import { useNavigate } from "react-router-dom";
 
  // Save the current date to be able to trigger an update
 
@@ -16,6 +17,28 @@ export default function Homepage () {
 
     const locale = 'en';
     const [today, setDate] = React.useState(new Date());
+    let navigate = useNavigate();
+    // Somewhere in your code, e.g. inside a handler:
+
+    const updateLocalSensorData = () => {
+        fetch('http://192.168.181.187:8000/api/distance')
+            .then(response => response.json()).then(json => {
+            if (json.status !== 'ko') {
+                if (json.data.distance <= 200) {
+                    navigate("/on");
+                }
+            }
+        });
+    }
+
+    React.useEffect(() => {
+        updateLocalSensorData();
+        const timer = setInterval(() => {
+            updateLocalSensorData();
+        }, 2 * 1000);
+        return () => clearInterval(timer);
+    }, []);
+
 
     React.useEffect(() => {
         const timer = setInterval(() => { // Creates an interval which will update the current data every minute
@@ -34,13 +57,13 @@ export default function Homepage () {
 
     const time = today.toLocaleTimeString(locale, { hour: 'numeric', hour12: true, minute: 'numeric' });
 
-    
+
     return (
 
         <div className = "wrapper-outside  ">
 
             <div id='background-homepage' className='relative overlay-minus-1'>
-                
+
             </div>
 
             <div className= "absolute overlay-1 full-width offset-right-0 offset-down-0">
@@ -56,12 +79,12 @@ export default function Homepage () {
                 </div>
             </div>
 
-            
+
 
 
         </div>
-        
-        
+
+
     )
-    
+
 }
