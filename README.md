@@ -20,3 +20,18 @@ It is also possible, by interacting with the screen, to see the map of near rent
 
 The last feature is that it is possible for the people to take a quiz on the screen and to test their knowledge in the Climate Change context. Through this, people are able to learn and discover what they do not know, but at the same time if they guess a number of quiz, they will be rewarded with a possible discount / gift card for electrical means of transport (so to promote them more) and/or a redeemable NFT (whose image is generated randomly by DALLE2 AI always in the green/eco context).
 
+## Project Structure
+
+The github repository contains a lot of other parts of the project.
+
+- frontend - contains everything about the frontend of the website and it has been realized by using ReactJs.
+- globalBackend - is the backend for the website realized using NodeJs.
+- localBackend - contains the backend of the Hardware part so that an API to access the data from the Hardware is available. Realized in Django.
+- esp32cam_recognition - contains the setup of the ESP32 Board with the cam module with the implementation of the neural network model, trained with TensorFlow.
+
+## Next Steps
+
+- [x] Implement in frontend the view of the Image generated after winning the Quiz 
+- [ ] Implement the DALLE2 API for generating an image from random words (almost done)
+- [ ] Implement OpenSea API for uploading the NFT image on the marketplace
+- [ ] Implement the posssibility to redeem the NFT through the screen through such a QR code or something
